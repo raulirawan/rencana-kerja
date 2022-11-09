@@ -43,10 +43,12 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    (+) Tambah Kegiatan
-                                </button>
+                                @if (Auth::user()->roles == 'ADMIN')
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        (+) Tambah Kegiatan
+                                    </button>
+                                @endif
 
                                 <div class="table-responsive">
                                     <table id="example1" class="table table-bordered table-striped">
@@ -72,24 +74,30 @@
                                                     <td>{{ $item->periode_awal ?? '-' }}</td>
                                                     <td>{{ $item->periode_akhir ?? '-' }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.renaksi.index', $item->id) }}"
-                                                            class="btn btn-sm btn-info badge mt-1 mr-1"
-                                                            style='float: left;'>Detail</a>
-                                                        <button type="button" id="edit" data-toggle="modal"
-                                                            data-target="#modal-edit" data-id="{{ $item->id }}"
-                                                            data-nama_kegiatan="{{ $item->nama_kegiatan }}"
-                                                            data-kategori="{{ $item->kategori }}"
-                                                            data-sasaran_strategis="{{ $item->sasaranStrategis->id }}"
-                                                            data-periode_awal="{{ $item->periode_awal }}"
-                                                            data-periode_akhir="{{ $item->periode_akhir }}"
-                                                            class="btn btn-sm btn-primary badge mt-1"
-                                                            style='float: left;'>Edit</button>
-                                                        <form action="{{ route('admin.kegiatan.delete', $item->id) }}"
-                                                            method="POST" style='float: left; padding-left: 5px;'>
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-sm btn-danger badge"
-                                                                onclick="return confirm('Yakin ?')">Hapus</button>
-                                                        </form>
+                                                        @if (Auth::user()->roles == 'ADMIN')
+                                                            <a href="{{ route('admin.renaksi.index', $item->id) }}"
+                                                                class="btn btn-sm btn-info badge mt-1 mr-1"
+                                                                style='float: left;'>Detail</a>
+                                                            <button type="button" id="edit" data-toggle="modal"
+                                                                data-target="#modal-edit" data-id="{{ $item->id }}"
+                                                                data-nama_kegiatan="{{ $item->nama_kegiatan }}"
+                                                                data-kategori="{{ $item->kategori }}"
+                                                                data-sasaran_strategis="{{ $item->sasaranStrategis->id }}"
+                                                                data-periode_awal="{{ $item->periode_awal }}"
+                                                                data-periode_akhir="{{ $item->periode_akhir }}"
+                                                                class="btn btn-sm btn-primary badge mt-1"
+                                                                style='float: left;'>Edit</button>
+                                                            <form action="{{ route('admin.kegiatan.delete', $item->id) }}"
+                                                                method="POST" style='float: left; padding-left: 5px;'>
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-sm btn-danger badge"
+                                                                    onclick="return confirm('Yakin ?')">Hapus</button>
+                                                            </form>
+                                                        @else
+                                                            <a href="{{ route('renaksi.index', $item->id) }}"
+                                                                class="btn btn-sm btn-info badge mt-1 mr-1"
+                                                                style='float: left;'>Detail</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

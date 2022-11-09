@@ -39,7 +39,8 @@
                         @endif
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Detail Ukuran Keberhasilan {{ $ukuran->periode }} <br> {{ $ukuran->renaksi->nama_renaksi }}</h3>
+                                <h3 class="card-title">Detail Ukuran Keberhasilan {{ $ukuran->periode }} <br>
+                                    {{ $ukuran->renaksi->nama_renaksi }}</h3>
                                 <a href="{{ url()->previous() }}" class="btn btn-primary mt-3 btn-xs"
                                     style="float: right">Kembali</a>
                             </div>
@@ -49,10 +50,34 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
+                                        <input type="hidden" value="{{ $ukuran->id }}" name="ukuran_id">
+
                                         <div class="form-group">
-                                            <input type="hidden" value="{{ $ukuran->id }}" name="ukuran_id">
                                             <label for="exampleInputEmail1">Catatan</label>
                                             <textarea name="catatan" id="catatan" required class="form-control" placeholder="Masukan Catatan"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Status</label>
+                                            <select name="status" id="status" class="form-control" required>
+                                                <option value="">Pilih Status</option>
+                                                <option value="TERCAPAI"
+                                                    {{ $ukuran->status == 'TERCAPAI' ? 'selected' : '' }}>Tercapai</option>
+                                                <option value="PERBAIKAN"
+                                                    {{ $ukuran->status == 'PERBAIKAN' ? 'selected' : '' }}>Perbaikan
+                                                </option>
+                                                <option value="TIDAK TERCAPAI"
+                                                    {{ $ukuran->status == 'TIDAK TERCAPAI' ? 'selected' : '' }}>Tidak
+                                                    Tercapai</option>
+                                                <option value="TIDAK SEMPURNA"
+                                                    {{ $ukuran->status == 'TIDAK SEMPURNA' ? 'selected' : '' }}>Tidak
+                                                    Sempurna</option>
+                                                <option value="VERIFIKASI"
+                                                    {{ $ukuran->status == 'VERIFIKASI' ? 'selected' : '' }}>Verifikasi
+                                                </option>
+                                                <option value="TIDAK LAPOR"
+                                                    {{ $ukuran->status == 'TIDAK LAPOR' ? 'selected' : '' }}>Tidak Lapor
+                                                </option>
+                                            </select>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Submit</button>

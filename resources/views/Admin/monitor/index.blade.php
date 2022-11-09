@@ -43,10 +43,12 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    (+) Tambah Monitor
-                                </button>
+                                @if (Auth::user()->roles == 'ADMIN')
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        (+) Tambah Monitor
+                                    </button>
+                                @endif
 
                                 <div class="table-responsive">
                                     <table id="example1" class="table table-bordered table-striped">
@@ -68,26 +70,32 @@
                                                     <td>{{ $item->verifikator }}</td>
                                                     <td>{{ $item->pemantau }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.kegiatan.index', $item->id) }}"
-                                                            class="btn btn-sm btn-info badge mt-1 mr-1"
-                                                            style='float: left;'>Detail</a>
-                                                        <a href="{{ route('admin.monitor.dashboard', $item->id) }}"
-                                                            class="btn btn-sm btn-success badge mt-1 mr-1"
-                                                            style='float: left;'>Dashboard</a>
-                                                        <button type="button" id="edit" data-toggle="modal"
-                                                            data-target="#modal-edit" data-id="{{ $item->id }}"
-                                                            data-nama_monitor="{{ $item->nama_monitor }}"
-                                                            data-verifikator="{{ $item->verifikator }}"
-                                                            data-pemantau="{{ $item->pemantau }}"
-                                                            data-tahun="{{ $item->tahun }}"
-                                                            class="btn btn-sm btn-primary badge mt-1"
-                                                            style='float: left;'>Edit</button>
-                                                        <form action="{{ route('admin.monitor.delete', $item->id) }}"
-                                                            method="POST" style='float: left; padding-left: 5px;'>
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-sm btn-danger badge"
-                                                                onclick="return confirm('Yakin ?')">Hapus</button>
-                                                        </form>
+                                                        @if (Auth::user()->roles == 'ADMIN')
+                                                            <a href="{{ route('admin.kegiatan.index', $item->id) }}"
+                                                                class="btn btn-sm btn-info badge mt-1 mr-1"
+                                                                style='float: left;'>Detail</a>
+                                                            <a href="{{ route('admin.monitor.dashboard', $item->id) }}"
+                                                                class="btn btn-sm btn-success badge mt-1 mr-1"
+                                                                style='float: left;'>Dashboard</a>
+                                                            <button type="button" id="edit" data-toggle="modal"
+                                                                data-target="#modal-edit" data-id="{{ $item->id }}"
+                                                                data-nama_monitor="{{ $item->nama_monitor }}"
+                                                                data-verifikator="{{ $item->verifikator }}"
+                                                                data-pemantau="{{ $item->pemantau }}"
+                                                                data-tahun="{{ $item->tahun }}"
+                                                                class="btn btn-sm btn-primary badge mt-1"
+                                                                style='float: left;'>Edit</button>
+                                                            <form action="{{ route('admin.monitor.delete', $item->id) }}"
+                                                                method="POST" style='float: left; padding-left: 5px;'>
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-sm btn-danger badge"
+                                                                    onclick="return confirm('Yakin ?')">Hapus</button>
+                                                            </form>
+                                                        @else
+                                                            <a href="{{ route('kegiatan.index', $item->id) }}"
+                                                                class="btn btn-sm btn-info badge mt-1 mr-1"
+                                                                style='float: left;'>Detail</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -142,8 +150,8 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tahun</label>
-                                <input type="number" max="4" min="4" class="form-control"
-                                    value="{{ old('tahun') }}" name="tahun" placeholder="Masukan Tahun" required>
+                                <input type="number" class="form-control" value="{{ old('tahun') }}" name="tahun"
+                                    placeholder="Masukan Tahun" required>
                             </div>
 
                         </div>
@@ -193,9 +201,8 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tahun</label>
-                                <input type="number" max="4" min="4" class="form-control"
-                                    value="{{ old('tahun') }}" id="tahun" name="tahun"
-                                    placeholder="Masukan Tahun" required>
+                                <input type="number"class="form-control" value="{{ old('tahun') }}" id="tahun"
+                                    name="tahun" placeholder="Masukan Tahun" required>
                             </div>
 
                         </div>

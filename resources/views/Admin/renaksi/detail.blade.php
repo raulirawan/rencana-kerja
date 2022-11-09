@@ -77,13 +77,17 @@
                             <div class="card card-primary card-tabs">
                                 <div class="card-header p-0 pt-1">
                                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="modal" data-target="#create-kriteria">(+)</a>
-                                        </li>
+                                        @if (Auth::user()->roles == 'ADMIN')
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="modal"
+                                                    data-target="#create-kriteria">(+)</a>
+                                            </li>
+                                        @endif
                                         @foreach ($renaksi->kriteria as $kriteria)
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
-                                                    href="#k1" role="tab" aria-controls="custom-tabs-one-home"
+                                                <a class="nav-link {{ $loop->index == 0 ? 'active' : '' }}" id="custom-tabs-one-home-tab" data-toggle="pill"
+                                                    href="#k{{ $loop->index + 1 }}" role="tab"
+                                                    aria-controls="custom-tabs-one-home"
                                                     aria-selected="true">K{{ $loop->index + 1 }}</a>
                                             </li>
                                         @endforeach
@@ -98,8 +102,9 @@
                                     <div class="tab-content" id="custom-tabs-one-tabContent">
                                         @if ($renaksi->kriteria->isNotEmpty())
                                             @foreach ($renaksi->kriteria as $kriteria)
-                                                <div class="tab-pane fade active show" id="k{{ $loop->index + 1 }}"
-                                                    role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                                <div class="tab-pane fade {{ $loop->index == 0 ? 'active show' : '' }}"
+                                                    id="k{{ $loop->index + 1 }}" role="tabpanel"
+                                                    aria-labelledby="custom-tabs-one-home-tab">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <strong><em>Kriteria Keberhasilan</em></strong>&nbsp;&nbsp;
@@ -145,7 +150,7 @@
                                                                 </td>
                                                                 <td style="width: 30%; ">
                                                                     @foreach (json_decode($kriteria->instansi) as $key => $data)
-                                                                        {{ App\Skpd::where('id', $data)->first()->nama_skpd }}
+                                                                        {{ App\Skpd::where('id', $data)->first()->nama_skpd }},
                                                                     @endforeach
                                                                 </td>
                                                                 <td style="width: 30%; "></td>
@@ -226,59 +231,61 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <table data-toggle="table" id="target-table"
-                                                data-classes="table table-hover table-striped table-no-bordered"
-                                                data-url="sub-renaksi/show-target?req=G4KMeKMKFMWyS_ucPjBgJfUsU1yUYy2KHoYBxTaxSbd7pVQDqSNyeQt4BcjR67tIm_MMT_rci2dJwR4D8QKmF8JR_Q"
-                                                data-row-style="rowStyle"
-                                                class="table table-hover table-striped table-no-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 10%; " data-field="checkpoint_names">
-                                                            <div class="th-inner ">Periode</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="width: 25%; " data-field="name">
-                                                            <div class="th-inner ">Target Capaian</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="text-align: center; width: 10%; " data-field="capaian">
-                                                            <div class="th-inner ">Capaian (%)</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="text-align: center; width: 10%; "
-                                                            data-field="nilai_tgupp">
-                                                            <div class="th-inner ">Nilai Pemantau (%)</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="width: 25%; " data-field="description">
-                                                            <div class="th-inner ">Keterangan / Kendala</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="text-align: left; width: 20%; "
-                                                            data-field="data_dukung">
-                                                            <div class="th-inner ">Data Dukung</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="text-align: left; width: 20%; "
-                                                            data-field="data_dukung">
-                                                            <div class="th-inner ">Aksi</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                            <div class="table-responsive">
+                                                <table data-toggle="table" id="target-table"
+                                                    data-classes="table table-hover table-striped table-no-bordered table-responsive"
+                                                    data-url="sub-renaksi/show-target?req=G4KMeKMKFMWyS_ucPjBgJfUsU1yUYy2KHoYBxTaxSbd7pVQDqSNyeQt4BcjR67tIm_MMT_rci2dJwR4D8QKmF8JR_Q"
+                                                    data-row-style="rowStyle"
+                                                    class="table table-hover table-striped table-no-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 10%; " data-field="checkpoint_names">
+                                                                <div class="th-inner ">Periode</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="width: 25%; " data-field="name">
+                                                                <div class="th-inner ">Target Capaian</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="text-align: center; width: 10%; "
+                                                                data-field="capaian">
+                                                                <div class="th-inner ">Capaian (%)</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="text-align: center; width: 10%; "
+                                                                data-field="nilai_tgupp">
+                                                                <div class="th-inner ">Nilai Pemantau (%)</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="width: 25%; " data-field="description">
+                                                                <div class="th-inner ">Keterangan / Kendala</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="text-align: left; width: 20%; "
+                                                                data-field="data_dukung">
+                                                                <div class="th-inner ">Data Dukung</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="text-align: left; width: 20%; "
+                                                                data-field="data_dukung">
+                                                                <div class="th-inner ">Aksi</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
 
-                                                    @foreach ($renaksi->ukuran as $ukuran)
-                                                        <tr data-index="1">
-                                                            <td style="width: 10%; ">{{ $ukuran->periode }}</td>
-                                                            <td style="width: 25%; ">
-                                                                <p>{{ $ukuran->target_capaian ?? '-' }}<br></p>
-                                                            </td>
-                                                            <td style="text-align: center; width: 10%; ">
-                                                                <h4><span
-                                                                        class="label is-color is-green">{{ $ukuran->capaian ?? 0 }}</span>
-                                                                </h4>
-                                                                {{-- <div class="col-lg-12">
+                                                        @foreach ($renaksi->ukuran as $ukuran)
+                                                            <tr data-index="1">
+                                                                <td style="width: 10%; ">{{ $ukuran->periode }}</td>
+                                                                <td style="width: 25%; ">
+                                                                    <p>{{ $ukuran->target_capaian ?? '-' }}<br></p>
+                                                                </td>
+                                                                <td style="text-align: center; width: 10%; ">
+                                                                    <h4><span
+                                                                            class="label is-color is-green">{{ $ukuran->capaian ?? 0 }}</span>
+                                                                    </h4>
+                                                                    {{-- <div class="col-lg-12">
                                                                 <div class="btn-group">
                                                                     <button type="button"
                                                                         class="btn btn-default btn-xs target-input-pembahasan-monev-bulanan"
@@ -304,72 +311,84 @@
                                                                     <p></p>
                                                                 </div>
                                                             </div> --}}
-                                                            </td>
-                                                            <td style="text-align: center; width: 10%; ">-</td>
-                                                            <td style="width: 25%; ">
-                                                                <div class="row">
+                                                                </td>
+                                                                <td style="text-align: center; width: 10%; ">-</td>
+                                                                <td style="width: 25%; ">
+                                                                    <div class="row">
 
-                                                                    <div class="col-lg-12">
-                                                                        {{-- <h4>
+                                                                        <div class="col-lg-12">
+                                                                            {{-- <h4>
                                                                         <span class="label is-color is-red">
                                                                             <i class="fa fa-bullhorn fa-fw"></i>&nbsp;Batas
                                                                             waktu pelaporan sudah berakhir
                                                                         </span>
                                                                     </h4> --}}
-                                                                        {{-- <hr> --}}
-                                                                        <strong>Keterangan: </strong>
-                                                                        <p></p>
-                                                                        <p>{{ $ukuran->keterangan ?? '-' }} </p>
-                                                                        <b>Catatan Verifikator :</b>
-                                                                        <p></p>
-                                                                        <p>{{ $ukuran->catatan ?? '-' }}<br> <br>
-                                                                            <br>
-                                                                        </p>
+                                                                            {{-- <hr> --}}
+                                                                            <strong>Keterangan: </strong>
+                                                                            <p></p>
+                                                                            <p>{{ $ukuran->keterangan ?? '-' }} </p>
+                                                                            <b>Catatan Verifikator :</b>
+                                                                            <p></p>
+                                                                            <p>{{ $ukuran->catatan ?? '-' }}<br> <br>
+                                                                                <br>
+                                                                            </p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td style="text-align: left; width: 20%; ">
-                                                                <ul class="fa-ul">
-                                                                    @php
-                                                                        $file_dukung = json_decode($ukuran->file_dukung);
-                                                                    @endphp
-                                                                    @if (isset($file_dukung))
-                                                                        @foreach ($file_dukung as $data)
-                                                                            <li>
-                                                                                <small>
-                                                                                    <span class="fa-li">
-                                                                                        <a href="javascript:void(0);"
-                                                                                            class="text-danger hapus-lampiran"
+                                                                </td>
+                                                                <td style="text-align: left; width: 20%; ">
+                                                                    <ul class="fa-ul">
+                                                                        @php
+                                                                            $file_pendukung = json_decode($ukuran->file_pendukung);
+                                                                        @endphp
+                                                                        @if (isset($file_pendukung))
+                                                                            @foreach ($file_pendukung as $data)
+                                                                                <li>
+                                                                                    <small>
+                                                                                        <span class="fa-li">
+                                                                                            <a href="javascript:void(0);"
+                                                                                                class="text-danger hapus-lampiran"
+                                                                                                data-toggle="tooltip"
+                                                                                                data-placement="top"
+                                                                                                data-target="jRW2BdpPbhtBsdVqy5efJ4AjZ8P2xNhDkkuayJO_9Og"
+                                                                                                data-original-title="Hapus MATRIKS CASCADING KINERJA ESELON 2, 3 DAN 4 BKD PROVINSI DKI JAKARTA TAHUN 2022.pdf">
+                                                                                                <i class="fa fa-times"></i>
+                                                                                            </a>
+                                                                                        </span>
+                                                                                        <a href="{{ $data }}"
+                                                                                            style="
+                                                                                        text-overflow: ellipsis;
+                                                                                        white-space: nowrap;
+                                                                                        width: 20px;
+                                                                                        overflow: hidden;"
+                                                                                            class="text-muted"
+                                                                                            target="_blank"
                                                                                             data-toggle="tooltip"
                                                                                             data-placement="top"
-                                                                                            data-target="jRW2BdpPbhtBsdVqy5efJ4AjZ8P2xNhDkkuayJO_9Og"
-                                                                                            data-original-title="Hapus MATRIKS CASCADING KINERJA ESELON 2, 3 DAN 4 BKD PROVINSI DKI JAKARTA TAHUN 2022.pdf">
-                                                                                            <i class="fa fa-times"></i>
+                                                                                            data-original-title="Lihat MATRIKS CASCADING KINERJA ESELON 2, 3 DAN 4 BKD PROVINSI DKI JAKARTA TAHUN 2022.pdf">
+                                                                                            {{ $data }}
                                                                                         </a>
-                                                                                    </span>
-                                                                                    <a href="{{ $data }}"
-                                                                                        class="text-muted" target="_blank"
-                                                                                        data-toggle="tooltip"
-                                                                                        data-placement="top"
-                                                                                        data-original-title="Lihat MATRIKS CASCADING KINERJA ESELON 2, 3 DAN 4 BKD PROVINSI DKI JAKARTA TAHUN 2022.pdf">
-                                                                                        MA… 2022.pdf
-                                                                                    </a>
-                                                                                </small>
-                                                                            </li>
-                                                                        @endforeach
+                                                                                    </small>
+                                                                                </li>
+                                                                            @endforeach
+                                                                        @else
+                                                                            Belum Tersedia
+                                                                        @endif
+                                                                    </ul>
+                                                                </td>
+                                                                <td>
+                                                                    @if (Auth::user()->roles == 'ADMIN')
+                                                                        <a href="{{ route('admin.renaksi.ukuran.detail', $ukuran->id) }}"
+                                                                            class="btn btn-primary badge">Detail</a>
                                                                     @else
-                                                                        Belum Tersedia
+                                                                        <a href="{{ route('renaksi.ukuran.detail', $ukuran->id) }}"
+                                                                            class="btn btn-primary badge">Update</a>
                                                                     @endif
-                                                                </ul>
-                                                            </td>
-                                                            <td>
-                                                                <a href="{{ route('admin.renaksi.ukuran.detail', $ukuran->id) }}"
-                                                                    class="btn btn-primary badge">Detail</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
 

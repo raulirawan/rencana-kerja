@@ -71,7 +71,24 @@
                             </p>
                         </a>
                     </li>
-                @endif  
+                @else
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('monitor.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Monitor
+                            </p>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"
                         onclick="event.preventDefault();

@@ -122,7 +122,27 @@ class RenaksiController extends Controller
         $ukuran = UkuranKeberhasilan::find($request->ukuran_id);
 
         $ukuran->catatan = $request->catatan;
+        $ukuran->status = $request->status;
+        if ($ukuran->bulan == 3) {
+            $renaksi = Renaksi::where('id', $ukuran->rencana_aksi_id)->first();
+            $renaksi->status = $request->status;
 
+            if ($request->status == 'TERCAPAI') {
+                $capaian = 100;
+            } elseif ($request->status == 'PERBAIKAN') {
+                $capaian = 80;
+            } elseif ($request->status == 'TIDAK SEMPURNA') {
+                $capaian = 60;
+            } elseif ($request->status == 'TIDAK TERCAPAI') {
+                $capaian = 40;
+            } elseif ($request->status == 'VERIFIKASI') {
+                $capaian = 20;
+            } elseif ($request->status == 'TIDAK LAPOR') {
+                $capaian = 0;
+            }
+            $renaksi->capaian = $capaian;
+            $renaksi->save();
+        }
         $ukuran->save();
 
         if ($ukuran != null) {
@@ -130,5 +150,12 @@ class RenaksiController extends Controller
         } else {
             return redirect()->route('admin.renaksi.detail', $ukuran->rencana_aksi_id)->with('error', 'Data Gagal di Update');
         }
+    }
+
+    public function getRenaksiStatus($monitor_id, $status, $periode)
+    {
+        $renaksi = Renaksi::where(['monitor_id' => $monitor_id, 'status' => $status, 'periode' => $periode])->get();
+
+        return view('Admin.renaksi.index-status', compact('renaksi'));
     }
 }
