@@ -47,7 +47,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.skpd.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-building"></i>
                             <p>
                                 Data Skpd
                             </p>
@@ -56,7 +56,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.sasaran-strategis.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-bullseye"></i>
                             <p>
                                 Sasaran Strategis
                             </p>
@@ -65,7 +65,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.monitor.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-desktop"></i>
                             <p>
                                 Monitor
                             </p>
@@ -82,7 +82,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('monitor.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-desktop"></i>
                             <p>
                                 Monitor
                             </p>

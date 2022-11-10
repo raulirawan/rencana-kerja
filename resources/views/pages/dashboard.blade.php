@@ -25,13 +25,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-12 col-6">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{ $sukses ?? '' }}</h3>
+                                <h3>{{ App\Renaksi::where('skpd_id', Auth::user()->skpd_id)->count() }}</h3>
 
-                                <p>Status Sukses</p>
+                                <p>Total Rencana Kerja</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -39,33 +39,9 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>{{ $pending ?? '' }}</h3>
 
-                                <p>Status Pending</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>
-                        </div>
-                    </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>{{ $gagal ?? '' }}</h3>
 
-                                <p>Status Gagal</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                        </div>
-                    </div>
                     <!-- ./col -->
                 </div>
                 <!-- /.row -->

@@ -25,13 +25,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- ./col -->
-                    <div class="col-lg-3 col">
+                    <div class="col-lg-6 col">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>2</h3>
+                                <h3>{{ App\Skpd::count() }}</h3>
 
-                                <p>Total Klien</p>
+                                <p>Total SKPD</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -39,13 +39,13 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col">
+                    <div class="col-lg-6 col">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>3</h3>
+                                <h3>{{ App\Renaksi::count() }}</h3>
 
-                                <p>Transaksi Sukses</p>
+                                <p>Total Rencana Kerja</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
@@ -53,33 +53,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>4</h3>
 
-
-                                <p>Transaksi Pending</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>2</h3>
-
-                                <p>Transaksi Batal</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                        </div>
-                    </div>
                     <!-- ./col -->
                 </div>
 
