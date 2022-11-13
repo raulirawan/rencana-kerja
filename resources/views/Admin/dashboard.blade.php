@@ -42,11 +42,11 @@
                     <div class="col-lg-6 col">
                         <!-- small box -->
                         <div class="small-box bg-success">
-                            <div class="inner">
+                            <b class="inner">
                                 <h3>{{ App\Renaksi::count() }}</h3>
 
                                 <p>Total Rencana Kerja</p>
-                            </div>
+                            </b>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>

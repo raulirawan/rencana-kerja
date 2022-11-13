@@ -113,7 +113,6 @@ class RenaksiController extends Controller
     public function detailUkuran($ukuran_id)
     {
         $ukuran = UkuranKeberhasilan::find($ukuran_id);
-
         return view('Admin.renaksi.detail-ukuran', compact('ukuran'));
     }
 

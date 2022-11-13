@@ -354,7 +354,7 @@
                                                                                                 <i class="fa fa-times"></i>
                                                                                             </a>
                                                                                         </span>
-                                                                                        <a href="{{ $data }}"
+                                                                                        <a href="{{ asset($data) }}"
                                                                                             style="
                                                                                         text-overflow: ellipsis;
                                                                                         white-space: nowrap;

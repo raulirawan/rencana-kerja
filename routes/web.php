@@ -55,12 +55,12 @@ Route::prefix('admin')
         Route::post('renaksi/delete/{id}', 'Admin\RenaksiController@delete')->name('admin.renaksi.delete');
         Route::get('/renaksi/detail/{renaksi_id}', 'Admin\RenaksiController@detail')->name('admin.renaksi.detail');
 
-        Route::get('renaksi/{kegiatan_id}/{status}/{periode}', 'Admin\RenaksiController@getRenaksiStatus')->name('admin.renaksi.status.index');
 
         Route::post('/renaksi/create/kriteria/', 'Admin\RenaksiController@storeKriteria')->name('admin.renaksi.store.kriteria');
 
         Route::get('/renaksi/ukuran/detail/{ukuran_id}', 'Admin\RenaksiController@detailUkuran')->name('admin.renaksi.ukuran.detail');
         Route::post('/renaksi/ukuran/update', 'Admin\RenaksiController@updateUkuran')->name('admin.renaksi.ukuran.update');
+        Route::get('renaksi/{kegiatan_id}/{status}/{periode}', 'Admin\RenaksiController@getRenaksiStatus')->name('admin.renaksi.status.index');
     });
 
 
