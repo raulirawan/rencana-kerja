@@ -21,6 +21,7 @@ class RenaksiController extends Controller
     {
         $kegiatan = Kegiatan::where('id', $request->kegiatan_id)->first();
         $data = new Renaksi();
+        $data->kode = $request->kode;
         $data->nama_renaksi = $request->nama_renaksi;
         $data->monitor_id = $kegiatan->monitor_id;
         $data->kegiatan_id = $request->kegiatan_id;
@@ -29,19 +30,77 @@ class RenaksiController extends Controller
 
         $data->save();
 
-        $kode = 'KSD' . $kegiatan->monitor->tahun . '' . $data->id;
 
-        $data->kode = $kode;
         $data->save();
 
         // create ukuran kebehasilan 3x
+        if ($data->periode == 'B03') {
+            $bulan = [
+                [
+                    'nama_bulan' => 'Januari',
+                    'bulan' => 1,
+                ],
+                [
+                    'nama_bulan' => 'Februari',
+                    'bulan' => 2,
+                ],
+                [
+                    'nama_bulan' => 'Maret',
+                    'bulan' => 3,
+                ],
+            ];
+        } elseif ($data->periode == 'B06') {
+            $bulan = [
+                [
+                    'nama_bulan' => 'April',
+                    'bulan' => 4,
+                ],
+                [
+                    'nama_bulan' => 'Mei',
+                    'bulan' => 5,
+                ],
+                [
+                    'nama_bulan' => 'Juni',
+                    'bulan' => 6,
+                ],
+            ];
+        } elseif ($data->periode == 'B09') {
+            $bulan = [
+                [
+                    'nama_bulan' => 'Juli',
+                    'bulan' => 7,
+                ],
+                [
+                    'nama_bulan' => 'Agustus',
+                    'bulan' => 8,
+                ],
+                [
+                    'nama_bulan' => 'September',
+                    'bulan' => 9,
+                ],
+            ];
+        } else {
+            $bulan = [
+                [
+                    'nama_bulan' => 'Oktober',
+                    'bulan' => 10,
+                ],
+                [
+                    'nama_bulan' => 'November',
+                    'bulan' => 11,
+                ],
+                [
+                    'nama_bulan' => 'Desember',
+                    'bulan' => 12,
+                ],
+            ];
+        }
 
-
-        for ($x = 1; $x <= 3; $x++) {
+        for ($x = 0; $x <= 2; $x++) {
             $ukuran = new UkuranKeberhasilan();
             $ukuran->rencana_aksi_id = $data->id;
-            $ukuran->bulan = $x;
-            $ukuran->periode = 'TA' . $kegiatan->monitor->tahun . '-B0' . $x;
+            $ukuran->bulan = $bulan[$x]['bulan'];
+            $ukuran->periode = 'TA' . $kegiatan->monitor->tahun . '-' . $bulan[$x]['nama_bulan'];
             $ukuran->capaian = 0;
             $ukuran->save();
         }
@@ -59,6 +118,7 @@ class RenaksiController extends Controller
     {
         $data = Renaksi::findOrFail($id);
 
+        $data->kode = $request->kode;
         $data->nama_renaksi = $request->nama_renaksi;
         $data->skpd_id = $request->skpd_id;
         $data->periode = $request->periode;
@@ -86,7 +146,6 @@ class RenaksiController extends Controller
     public function detail($renaksi_id)
     {
         $renaksi = Renaksi::find($renaksi_id);
-
 
         return view('Admin.renaksi.detail', compact('renaksi'));
     }

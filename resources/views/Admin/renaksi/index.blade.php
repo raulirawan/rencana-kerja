@@ -75,6 +75,7 @@
                                                                 style='float: left;'>Detail</a>
                                                             <button type="button" id="edit" data-toggle="modal"
                                                                 data-target="#modal-edit" data-id="{{ $item->id }}"
+                                                                data-kode="{{ $item->kode }}"
                                                                 data-nama_renaksi="{{ $item->nama_renaksi }}"
                                                                 data-skpd="{{ $item->skpd->id }}"
                                                                 data-periode="{{ $item->periode }}"
@@ -128,12 +129,20 @@
                     <form method="POST" action="{{ route('admin.renaksi.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+                            <input type="hidden" name="kegiatan_id" value="{{ $kegiatan_id }}">
                             <div class="form-group">
-                                <input type="hidden" name="kegiatan_id" value="{{ $kegiatan_id }}">
+                                <label for="exampleInputEmail1">Kode</label>
+                                <input type="text" class="form-control" name="kode" placeholder="Masukan Kode"
+                                    required>
+
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Renaksi</label>
                                 <textarea name="nama_renaksi" class="form-control" placeholder="Masukan Nama Renaksi" required></textarea>
 
                             </div>
+
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Penanggung Jawab</label>
@@ -185,8 +194,14 @@
                     <form method="POST" id="form-edit" action="#" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+                            <input type="hidden" name="kegiatan_id" value="{{ $kegiatan_id }}">
                             <div class="form-group">
-                                <input type="hidden" name="kegiatan_id" value="{{ $kegiatan_id }}">
+                                <label for="exampleInputEmail1">Kode</label>
+                                <input type="text" class="form-control" id="kode" name="kode"
+                                    placeholder="Masukan Kode" required>
+
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Renaksi</label>
                                 <textarea name="nama_renaksi" id="nama_renaksi" class="form-control" placeholder="Masukan Nama Renaksi" required></textarea>
 
@@ -202,7 +217,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputEmail1">Periode</label>
                                 <select name="periode" id="periode" class="form-control" required>
                                     <option value="">Pilih Periode</option>
@@ -211,7 +226,7 @@
                                     <option value="B09">B09</option>
                                     <option value="B12">B12</option>
                                 </select>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -247,11 +262,13 @@
         $(document).ready(function() {
             $(document).on('click', '#edit', function() {
                 var id = $(this).data('id');
+                var kode = $(this).data('kode');
                 var nama_renaksi = $(this).data('nama_renaksi');
                 var periode = $(this).data('periode');
                 var skpd_id = $(this).data('skpd');
 
 
+                $('#kode').val(kode);
                 $('#nama_renaksi').val(nama_renaksi);
                 $('#periode').val(periode);
                 $('#skpd_id').val(skpd_id);

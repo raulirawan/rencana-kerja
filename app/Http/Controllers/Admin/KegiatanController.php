@@ -17,6 +17,7 @@ class KegiatanController extends Controller
     public function store(Request $request)
     {
         $data = new Kegiatan();
+        $data->kode = $request->kode;
         $data->nama_kegiatan = $request->nama_kegiatan;
         $data->monitor_id = $request->monitor_id;
         $data->sasaran_id = $request->sasaran_id;
@@ -37,6 +38,7 @@ class KegiatanController extends Controller
     {
         $data = Kegiatan::findOrFail($id);
 
+        $data->kode = $request->kode;
         $data->nama_kegiatan = $request->nama_kegiatan;
         $data->monitor_id = $request->monitor_id;
         $data->sasaran_id = $request->sasaran_id;

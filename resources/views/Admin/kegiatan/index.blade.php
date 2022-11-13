@@ -55,11 +55,11 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 5%">No</th>
+                                                <th>Kode</th>
                                                 <th>Nama Kegiatan</th>
                                                 <th>Kategori</th>
                                                 <th>Sasaran Strategis</th>
-                                                <th>Periode Awal</th>
-                                                <th>Periode Akhir</th>
+
                                                 <th style="width: 15%">Aksi</th>
 
                                             </tr>
@@ -68,11 +68,11 @@
                                             @foreach ($kegiatan as $item)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $item->kode ?? 'Tidak Ada' }}</td>
                                                     <td>{{ $item->nama_kegiatan }}</td>
                                                     <td>{{ $item->kategori }}</td>
                                                     <td>{{ $item->sasaranStrategis->nama_sasaran }}</td>
-                                                    <td>{{ $item->periode_awal ?? '-' }}</td>
-                                                    <td>{{ $item->periode_akhir ?? '-' }}</td>
+
                                                     <td>
                                                         @if (Auth::user()->roles == 'ADMIN')
                                                             <a href="{{ route('admin.renaksi.index', $item->id) }}"
@@ -80,11 +80,10 @@
                                                                 style='float: left;'>Detail</a>
                                                             <button type="button" id="edit" data-toggle="modal"
                                                                 data-target="#modal-edit" data-id="{{ $item->id }}"
+                                                                data-kode="{{ $item->kode }}"
                                                                 data-nama_kegiatan="{{ $item->nama_kegiatan }}"
                                                                 data-kategori="{{ $item->kategori }}"
                                                                 data-sasaran_strategis="{{ $item->sasaranStrategis->id }}"
-                                                                data-periode_awal="{{ $item->periode_awal }}"
-                                                                data-periode_akhir="{{ $item->periode_akhir }}"
                                                                 class="btn btn-sm btn-primary badge mt-1"
                                                                 style='float: left;'>Edit</button>
                                                             <form action="{{ route('admin.kegiatan.delete', $item->id) }}"
@@ -135,8 +134,14 @@
                     <form method="POST" action="{{ route('admin.kegiatan.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+                            <input type="hidden" name="monitor_id" value="{{ $monitor_id }}">
                             <div class="form-group">
-                                <input type="hidden" name="monitor_id" value="{{ $monitor_id }}">
+                                <label for="exampleInputEmail1">Kode</label>
+                                <input type="text" class="form-control" name="kode" placeholder="Masukan Kode"
+                                    required>
+
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Kegiatan</label>
                                 <textarea name="nama_kegiatan" class="form-control" placeholder="Masukan Nama Kegiatan" required></textarea>
 
@@ -155,7 +160,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputEmail1">Periode Awal</label>
                                 <input type="date" name="periode_awal" class="form-control">
                             </div>
@@ -163,7 +168,7 @@
                                 <label for="exampleInputEmail1">Periode Akhir</label>
                                 <input type="date" name="periode_akhir" class="form-control">
 
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -194,8 +199,14 @@
                     <form method="POST" id="form-edit" action="#" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+                            <input type="hidden" name="monitor_id" value="{{ $monitor_id }}">
                             <div class="form-group">
-                                <input type="hidden" name="monitor_id" value="{{ $monitor_id }}">
+                                <label for="exampleInputEmail1">Kode</label>
+                                <input type="text" class="form-control" id="kode" name="kode"
+                                    placeholder="Masukan Kode" required>
+
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Kegiatan</label>
                                 <textarea name="nama_kegiatan" id="nama_kegiatan" class="form-control" placeholder="Masukan Nama Kegiatan" required></textarea>
 
@@ -215,7 +226,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputEmail1">Periode Awal</label>
                                 <input type="date" id="periode_awal" name="periode_awal" class="form-control">
                             </div>
@@ -223,7 +234,7 @@
                                 <label for="exampleInputEmail1">Periode Akhir</label>
                                 <input type="date" id="periode_akhir" name="periode_akhir" class="form-control">
 
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -259,18 +270,16 @@
         $(document).ready(function() {
             $(document).on('click', '#edit', function() {
                 var id = $(this).data('id');
+                var kode = $(this).data('kode');
                 var nama_kegiatan = $(this).data('nama_kegiatan');
                 var kategori = $(this).data('kategori');
                 var sasaran_id = $(this).data('sasaran_strategis');
-                var periode_awal = $(this).data('periode_awal');
-                var periode_akhir = $(this).data('periode_akhir');
 
 
+                $('#kode').val(kode);
                 $('#nama_kegiatan').val(nama_kegiatan);
                 $('#kategori').val(kategori);
                 $('#sasaran_id').val(sasaran_id);
-                $('#periode_awal').val(periode_awal);
-                $('#periode_akhir').val(periode_akhir);
 
                 $('#form-edit').attr('action', '/admin/kegiatan/update/' + id);
             });

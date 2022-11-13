@@ -64,6 +64,10 @@
                                             <th style="width: 200px">Rencana Aksi</th>
                                             <td>{{ $renaksi->nama_renaksi }}</td>
                                         </tr>
+                                        <tr>
+                                            <th style="width: 200px">Periode</th>
+                                            <td>{{ $renaksi->periode }}</td>
+                                        </tr>
 
                                     </tbody>
                                 </table>
@@ -85,7 +89,8 @@
                                         @endif
                                         @foreach ($renaksi->kriteria as $kriteria)
                                             <li class="nav-item">
-                                                <a class="nav-link {{ $loop->index == 0 ? 'active' : '' }}" id="custom-tabs-one-home-tab" data-toggle="pill"
+                                                <a class="nav-link {{ $loop->index == 0 ? 'active' : '' }}"
+                                                    id="custom-tabs-one-home-tab" data-toggle="pill"
                                                     href="#k{{ $loop->index + 1 }}" role="tab"
                                                     aria-controls="custom-tabs-one-home"
                                                     aria-selected="true">K{{ $loop->index + 1 }}</a>
@@ -252,18 +257,17 @@
                                                                 <div class="th-inner ">Capaian (%)</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th style="text-align: center; width: 10%; "
-                                                                data-field="nilai_tgupp">
-                                                                <div class="th-inner ">Nilai Pemantau (%)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
                                                             <th style="width: 25%; " data-field="description">
-                                                                <div class="th-inner ">Keterangan / Kendala</div>
+                                                                <div class="th-inner ">Keterangan</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th style="text-align: left; width: 20%; "
+                                                            <th style="width: 25%;" data-field="description">
+                                                                <div class="th-inner ">Kendala</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="text-align: left; width: 10%; "
                                                                 data-field="data_dukung">
-                                                                <div class="th-inner ">Data Dukung</div>
+                                                                <div class="th-inner">Data Dukung</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th style="text-align: left; width: 20%; "
@@ -278,7 +282,7 @@
                                                         @foreach ($renaksi->ukuran as $ukuran)
                                                             <tr data-index="1">
                                                                 <td style="width: 10%; ">{{ $ukuran->periode }}</td>
-                                                                <td style="width: 25%; ">
+                                                                <td style="width: 35%; ">
                                                                     <p>{{ $ukuran->target_capaian ?? '-' }}<br></p>
                                                                 </td>
                                                                 <td style="text-align: center; width: 10%; ">
@@ -312,7 +316,6 @@
                                                                 </div>
                                                             </div> --}}
                                                                 </td>
-                                                                <td style="text-align: center; width: 10%; ">-</td>
                                                                 <td style="width: 25%; ">
                                                                     <div class="row">
 
@@ -324,18 +327,29 @@
                                                                         </span>
                                                                     </h4> --}}
                                                                             {{-- <hr> --}}
-                                                                            <strong>Keterangan: </strong>
-                                                                            <p></p>
+                                                                            {{-- <strong>Keterangan: </strong> --}}
                                                                             <p>{{ $ukuran->keterangan ?? '-' }} </p>
-                                                                            <b>Catatan Verifikator :</b>
-                                                                            <p></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td style="width: 25%; ">
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-12">
+                                                                            {{-- <h4>
+                                                                        <span class="label is-color is-red">
+                                                                            <i class="fa fa-bullhorn fa-fw"></i>&nbsp;Batas
+                                                                            waktu pelaporan sudah berakhir
+                                                                        </span>
+                                                                    </h4> --}}
+                                                                            {{-- <hr> --}}
+                                                                            {{-- <b>Catatan Verifikator :</b> --}}
                                                                             <p>{{ $ukuran->catatan ?? '-' }}<br> <br>
-                                                                                <br>
                                                                             </p>
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                                <td style="text-align: left; width: 20%; ">
+                                                                <td style="text-align: left; width: 10%; ">
                                                                     <ul class="fa-ul">
                                                                         @php
                                                                             $file_pendukung = json_decode($ukuran->file_pendukung);
@@ -356,10 +370,11 @@
                                                                                         </span>
                                                                                         <a href="{{ asset($data) }}"
                                                                                             style="
-                                                                                        text-overflow: ellipsis;
-                                                                                        white-space: nowrap;
-                                                                                        width: 20px;
-                                                                                        overflow: hidden;"
+                                                                                           max-width: 100px;
+                                                                                            display: block;
+                                                                                            white-space: nowrap;
+                                                                                            text-overflow: ellipsis;
+                                                                                            overflow: hidden;"
                                                                                             class="text-muted"
                                                                                             target="_blank"
                                                                                             data-toggle="tooltip"
