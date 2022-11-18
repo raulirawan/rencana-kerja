@@ -51,10 +51,10 @@
                                     @csrf
                                     <div class="card-body">
                                         <input type="hidden" value="{{ $ukuran->id }}" name="ukuran_id">
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="exampleInputEmail1">Target Capaian</label>
                                             <textarea name="target_capaian" id="target_capaian" required class="form-control" placeholder="Masukan Target Capaian">{{ $ukuran->target_capaian }}</textarea>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Capaian</label>

@@ -43,7 +43,6 @@ class RenaksiController extends Controller
 
         $ukuran = UkuranKeberhasilan::find($request->ukuran_id);
 
-        $ukuran->target_capaian = $request->target_capaian;
         $ukuran->capaian = $request->capaian;
         $ukuran->keterangan = $request->keterangan;
 
