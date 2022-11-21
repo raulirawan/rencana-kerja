@@ -57,6 +57,16 @@ Route::prefix('admin')
 
 
         Route::post('/renaksi/create/kriteria/', 'Admin\RenaksiController@storeKriteria')->name('admin.renaksi.store.kriteria');
+        Route::post('/renaksi/update/kriteria/{kriteria_id}', 'Admin\RenaksiController@updateKriteria')->name('admin.renaksi.update.kriteria');
+        Route::get('/renaksi/hapus/kriteria/{kriteria_id}', 'Admin\RenaksiController@hapusKriteria')->name('admin.renaksi.hapus.kriteria');
+
+        Route::post('/renaksi/create/ukuran-keberhasilan/', 'Admin\RenaksiController@storeUkuranKeberhasilan')->name('admin.renaksi.store.ukuran-keberhasilan');
+        Route::post('/renaksi/update/ukuran-keberhasilan/{ukuran_id}', 'Admin\RenaksiController@updatestoreUkuranKeberhasilan')->name('admin.renaksi.update.ukuran-keberhasilan');
+        Route::get('/renaksi/hapus/ukuran-keberhasilan/{ukuran_id}', 'Admin\RenaksiController@hapusUkuranKeberhasilan')->name('admin.renaksi.hapus.ukuran-keberhasilan');
+
+
+        Route::post('/renaksi/update/target-capaian/{renaksi_id}', 'Admin\RenaksiController@updateTargetCapaian')->name('admin.renaksi.update.target.capaian');
+
 
         Route::get('/renaksi/ukuran/detail/{ukuran_id}', 'Admin\RenaksiController@detailUkuran')->name('admin.renaksi.ukuran.detail');
         Route::post('/renaksi/ukuran/update', 'Admin\RenaksiController@updateUkuran')->name('admin.renaksi.ukuran.update');

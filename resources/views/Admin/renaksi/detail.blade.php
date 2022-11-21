@@ -142,11 +142,12 @@
                                                                     </div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
-                                                                <th style="width: 30%; " data-field="2">
-                                                                    <div class="th-inner ">Nama Instansi/Lembaga Lainnya
+                                                                <th style="width: 30%; " data-field="1">
+                                                                    <div class="th-inner ">Aksi
                                                                     </div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -158,7 +159,16 @@
                                                                         {{ App\Skpd::where('id', $data)->first()->nama_skpd }},
                                                                     @endforeach
                                                                 </td>
-                                                                <td style="width: 30%; "></td>
+                                                                <td>
+                                                                    <button class="btn btn-primary badge" id="edit-kriteria"
+                                                                        data-toggle="modal" data-target="#kriteria-edit"
+                                                                        data-id="{{ $kriteria->id }}"
+                                                                        data-kriteria_keberhasilan="{{ $kriteria->kriteria_keberhasilan }}"
+                                                                        data-unit_kerja="{{ $kriteria->instansi }}">Edit</button>
+                                                                    <a href="{{ route('admin.renaksi.hapus.kriteria', $kriteria->id) }}"
+                                                                        class="btn btn-danger badge"
+                                                                        onclick="return confirm('Yakin ?')">Hapus</a>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -171,7 +181,8 @@
                                                     <div class="panel-heading">
                                                         <strong><em>Kriteria Keberhasilan</em></strong>&nbsp;&nbsp;
                                                         <i class="fa fa-info-circle text-success log-criteria"
-                                                            data-toggle="tooltip" data-placement="right" title="Disetujui"
+                                                            data-toggle="tooltip" data-placement="right"
+                                                            title="Disetujui"
                                                             data-request="PulX1834vwPEhWiI9lAZjCMnhGmgzq9PK8WXLxAa52Q">
                                                         </i>
                                                         <div class="pull-right">
@@ -201,11 +212,135 @@
                             <div class="card card-primary card-tabs">
                                 <div class="card-header p-0 pt-1">
                                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                        @if (Auth::user()->roles == 'ADMIN')
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="modal"
+                                                    data-target="#create-ukuran">(+)</a>
+                                            </li>
+                                        @endif
+                                        @foreach ($renaksi->masterUkuran as $ukuran)
+                                            <li class="nav-item">
+                                                <a class="nav-link {{ $loop->index == 0 ? 'active' : '' }}"
+                                                    id="custom-tabs-one-home-tab" data-toggle="pill"
+                                                    href="#u{{ $loop->index + 1 }}" role="tab"
+                                                    aria-controls="custom-tabs-one-home"
+                                                    aria-selected="true">U{{ $loop->index + 1 }}</a>
+                                            </li>
+                                        @endforeach
+                                        {{-- <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                                                href="#custom-tabs-one-profile" role="tab"
+                                                aria-controls="custom-tabs-one-profile" aria-selected="false">K2</a>
+                                        </li> --}}
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                                        @if ($renaksi->masterUkuran->isNotEmpty())
+                                            @foreach ($renaksi->masterUkuran as $ukuran)
+                                                <div class="tab-pane fade {{ $loop->index == 0 ? 'active show' : '' }}"
+                                                    id="u{{ $loop->index + 1 }}" role="tabpanel"
+                                                    aria-labelledby="custom-tabs-one-home-tab">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <strong><em>Ukuran Keberhasilan</em></strong>&nbsp;&nbsp;
+                                                            <i class="fa fa-info-circle text-success log-criteria"
+                                                                data-toggle="tooltip" data-placement="right"
+                                                                title="Disetujui"
+                                                                data-request="PulX1834vwPEhWiI9lAZjCMnhGmgzq9PK8WXLxAa52Q">
+                                                            </i>
+                                                            <div class="pull-right">
+                                                                <div class="btn-group">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="panel-body G4KMeKMKFMWyS_ucPjBgJfUsU1yUYy2KHoYBxTaxSbcpXj1J0vxI7bj9Ql5S8L73bIRasfY0QvrQU9Sycfdx5Q">
+                                                        </div>
+                                                    </div>
+                                                    <table data-toggle="table"
+                                                        data-classes="table table-hover table-striped"
+                                                        data-row-style="rowStyle" class="table table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 30%; " data-field="0">
+                                                                    <div class="th-inner ">Ukuran Keberhasilan</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+
+                                                                <th style="width: 30%; " data-field="1">
+                                                                    <div class="th-inner ">Aksi
+                                                                    </div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="info" data-index="0">
+                                                                <td style="width: 85%; ">
+                                                                    {{ $ukuran->ukuran_keberhasilan }}
+                                                                </td>
+
+                                                                <td>
+                                                                    <button class="btn btn-primary badge" id="edit-ukuran"
+                                                                        data-toggle="modal" data-target="#ukuran-edit"
+                                                                        data-id="{{ $ukuran->id }}"
+                                                                        data-ukuran_keberhasilan="{{ $ukuran->ukuran_keberhasilan }}">Edit</button>
+                                                                    <a href="{{ route('admin.renaksi.hapus.ukuran-keberhasilan', $ukuran->id) }}"
+                                                                        class="btn btn-danger badge"
+                                                                        onclick="return confirm('Yakin ?')">Hapus</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="tab-pane fade active show" role="tabpanel"
+                                                aria-labelledby="custom-tabs-one-home-tab">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <strong><em>Ukuran Keberhasilan</em></strong>&nbsp;&nbsp;
+                                                        <i class="fa fa-info-circle text-success log-criteria"
+                                                            data-toggle="tooltip" data-placement="right"
+                                                            title="Disetujui"
+                                                            data-request="PulX1834vwPEhWiI9lAZjCMnhGmgzq9PK8WXLxAa52Q">
+                                                        </i>
+                                                        <div class="pull-right">
+                                                            <div class="btn-group">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="panel-body G4KMeKMKFMWyS_ucPjBgJfUsU1yUYy2KHoYBxTaxSbcpXj1J0vxI7bj9Ql5S8L73bIRasfY0QvrQU9Sycfdx5Q">
+                                                        <p>Belum Tersedia</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        @endif
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="card-header">
+                                <h3 class="card-title">Target Capaian</h3>
+
+                            </div>
+                            <div class="card card-primary card-tabs">
+                                <div class="card-header p-0 pt-1">
+                                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
 
                                         <li class="nav-item">
                                             <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
                                                 href="#u1" role="tab" aria-controls="custom-tabs-one-home"
-                                                aria-selected="true">U1</a>
+                                                aria-selected="true">T1</a>
                                         </li>
                                         {{-- <li class="nav-item">
                                                 <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
@@ -220,11 +355,12 @@
                                             aria-labelledby="custom-tabs-one-home-tab">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <strong><em>Ukuran Keberhasilan</em></strong>&nbsp;&nbsp;
+                                                    <strong><em>Target Capaian</em></strong>&nbsp;&nbsp;
                                                     <i class="fa fa-info-circle text-success log-criteria"
                                                         data-toggle="tooltip" data-placement="right" title="Disetujui"
                                                         data-request="PulX1834vwPEhWiI9lAZjCMnhGmgzq9PK8WXLxAa52Q">
                                                     </i>
+
                                                     <div class="pull-right">
                                                         <div class="btn-group">
                                                         </div>
@@ -232,9 +368,45 @@
                                                 </div>
                                                 <div
                                                     class="panel-body G4KMeKMKFMWyS_ucPjBgJfUsU1yUYy2KHoYBxTaxSbcpXj1J0vxI7bj9Ql5S8L73bIRasfY0QvrQU9Sycfdx5Q">
-                                                    <p>Persentase penyelesaian penyusunan Dokumen Kinerja tepat waktu<br>
-                                                    </p>
+                                                    {{-- <p>Persentase penyelesaian penyusunan Dokumen Kinerja tepat waktu<br>
+                                                    </p> --}}
                                                 </div>
+                                                <table data-toggle="table"
+                                                data-classes="table table-hover table-striped"
+                                                data-row-style="rowStyle" class="table table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 30%; " data-field="0">
+                                                            <div class="th-inner ">Target Capaian</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+
+                                                        <th style="width: 30%; " data-field="1">
+                                                            <div class="th-inner ">Action
+                                                            </div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="info" data-index="0">
+                                                        <td style="width: 85%; ">
+                                                            {{ $renaksi->target_capaian ?? 'Belum Tersedia' }}
+                                                        </td>
+
+                                                        <td>
+                                                            <button class="btn btn-primary badge" id="edit-target-capaian"
+                                                                data-toggle="modal" data-target="#target-capaian-edit"
+                                                                data-renaksi_id="{{ $renaksi->id }}"
+                                                                data-target_capaian="{{ $renaksi->target_capaian }}">Edit</button>
+                                                            {{-- <a href="{{ route('admin.renaksi.hapus.ukuran-keberhasilan', $ukuran->id) }}"
+                                                                class="btn btn-danger badge"
+                                                                onclick="return confirm('Yakin ?')">Hapus</a> --}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                             </div>
                                             <div class="table-responsive">
                                                 <table data-toggle="table" id="target-table"
@@ -249,7 +421,7 @@
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th style="width: 25%; " data-field="name">
-                                                                <div class="th-inner ">Target Capaian</div>
+                                                                <div class="th-inner ">Tahapan Pencapaian Target</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th style="text-align: center; width: 10%; "
@@ -329,6 +501,9 @@
                                                                             {{-- <hr> --}}
                                                                             {{-- <strong>Keterangan: </strong> --}}
                                                                             <p>{{ $ukuran->keterangan ?? '-' }} </p>
+                                                                            <b>Catatan Verifikator :</b>
+                                                                            <p>{{ $ukuran->catatan ?? '-' }}<br> <br>
+                                                                            </p>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -344,7 +519,7 @@
                                                                     </h4> --}}
                                                                             {{-- <hr> --}}
                                                                             {{-- <b>Catatan Verifikator :</b> --}}
-                                                                            <p>{{ $ukuran->catatan ?? '-' }}<br> <br>
+                                                                            <p>{{ $ukuran->kendala ?? '-' }}<br> <br>
                                                                             </p>
                                                                         </div>
                                                                     </div>
@@ -411,6 +586,8 @@
 
                                 </div>
                             </div>
+
+
                         </div>
 
                         <!-- /.card -->
@@ -424,8 +601,6 @@
     </section>
     <!-- /.content -->
     </div>
-
-
 
     <div class="modal fade" id="create-kriteria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -481,7 +656,251 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="kriteria-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Kriteria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="#" id="form-edit-kriteria" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="hidden" name="renaksi_id" value="{{ $renaksi->id }}">
+                                <label for="exampleInputEmail1">Kriteria Keberhasilan</label>
+                                <textarea name="kriteria_keberhasilan" id="kriteria_keberhasilan" class="form-control"
+                                    placeholder="Masukan Kriteria Keberhasilan" required></textarea>
+
+                            </div>
+
+                            {{-- <div class="form-group">
+                            <label for="exampleInputEmail1">Instansi Unit Kerja</label>
+                            <select name="skpd_id" class="form-control" required>
+                                <option value="">Pilih Instansi Unit Kerja</option>
+                                @foreach (App\Skpd::all() as $skpd)
+                                    <option value="{{ $skpd->id }}">{{ $skpd->nama_skpd }}</option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+                            <div class="form-group">
+                                <label>Instansi Unit Kerja</label>
+                                <select class="select2" name="unit_kerja[]" multiple="multiple"
+                                    data-placeholder="Pilih Instansi Unit Kerja" id="unit_kerja" style="width: 100%;">
+                                    @foreach (App\Skpd::all() as $skpd)
+                                        <option value="{{ $skpd->id }}">{{ $skpd->nama_skpd }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="create-ukuran" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Ukuran Keberhasilan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('admin.renaksi.store.ukuran-keberhasilan') }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="hidden" name="renaksi_id" value="{{ $renaksi->id }}">
+                                <label for="exampleInputEmail1">Ukuran Keberhasilan</label>
+                                <textarea name="ukuran_keberhasilan" class="form-control" placeholder="Masukan Ukuran Keberhasilan" required></textarea>
+
+                            </div>
+
+
+
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ukuran-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Ukuran Keberhasilan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="#" enctype="multipart/form-data" id="form-edit-ukuran">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="hidden" name="renaksi_id" value="{{ $renaksi->id }}">
+                                <label for="exampleInputEmail1">Ukuran Keberhasilan</label>
+                                <textarea name="ukuran_keberhasilan" id="ukuran_keberhasilan" class="form-control"
+                                    placeholder="Masukan Ukuran Keberhasilan" required></textarea>
+
+                            </div>
+
+
+
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ukuran-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Ukuran Keberhasilan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="#" enctype="multipart/form-data" id="form-edit-ukuran">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="hidden" name="renaksi_id" value="{{ $renaksi->id }}">
+                                <label for="exampleInputEmail1">Ukuran Keberhasilan</label>
+                                <textarea name="ukuran_keberhasilan" id="ukuran_keberhasilan" class="form-control"
+                                    placeholder="Masukan Ukuran Keberhasilan" required></textarea>
+
+                            </div>
+
+
+
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="target-capaian-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Target Capaian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="#" enctype="multipart/form-data" id="form-edit-target-capaian">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="hidden" name="renaksi_id" value="{{ $renaksi->id }}">
+                            <label for="exampleInputEmail1">Target Capaian</label>
+                            <textarea name="target_capaian" id="target_capaian" class="form-control"
+                                placeholder="Masukan Target Capaian" required></textarea>
+
+                        </div>
+
+
+
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan Data</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
     @push('down-script')
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', '#edit-kriteria', function() {
+                    var id = $(this).data('id');
+                    var kriteria_keberhasilan = $(this).data('kriteria_keberhasilan');
+                    var unit_kerja = $(this).data('unit_kerja').toString();
+
+                    $.each(unit_kerja.split(","), function(i, e) {
+                        $("#unit_kerja option[value='" + e + "']").prop("selected", true);
+                    });
+
+                    $('#kriteria_keberhasilan').val(kriteria_keberhasilan);
+
+                    $('#form-edit-kriteria').attr('action', '/admin/renaksi/update/kriteria/' + id);
+                });
+
+                $(document).on('click', '#edit-ukuran', function() {
+                    var id = $(this).data('id');
+                    var ukuran_keberhasilan = $(this).data('ukuran_keberhasilan');
+
+                    $('#ukuran_keberhasilan').val(ukuran_keberhasilan);
+
+                    $('#form-edit-ukuran').attr('action', '/admin/renaksi/update/ukuran-keberhasilan/' + id);
+                });
+
+                $(document).on('click', '#edit-target-capaian', function() {
+                    var id = $(this).data('renaksi_id');
+                    var target_capaian = $(this).data('target_capaian');
+
+                    $('#target_capaian').val(target_capaian);
+
+                    $('#form-edit-target-capaian').attr('action', '/admin/renaksi/update/target-capaian/' + id);
+                });
+
+
+
+            });
+        </script>
         <script>
             $(function() {
                 //Initialize Select2 Elements

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Ukuran;
+use App\Renaksi;
 use App\Kegiatan;
 use App\Kriteria;
-use App\Renaksi;
 use App\UkuranKeberhasilan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RenaksiController extends Controller
 {
@@ -169,6 +170,103 @@ class RenaksiController extends Controller
         }
     }
 
+    public function updateKriteria(Request $request, $id)
+    {
+        $renaksi_id = $request->renaksi_id;
+        // $renaksi = Renaksi::where('id', $renaksi_id)->first();
+        $data = Kriteria::findOrFail($id);
+        $data->kriteria_keberhasilan = $request->kriteria_keberhasilan;
+        $data->instansi = json_encode($request->unit_kerja);
+
+        $data->save();
+
+
+        if ($data != null) {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('success', 'Data Berhasil di Update');
+        } else {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('error', 'Data Gagal di Update');
+        }
+    }
+
+    public function hapusKriteria($id)
+    {
+        $data = Kriteria::findOrFail($id);
+
+        $data->delete();
+
+        if ($data != null) {
+            return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+        } else {
+            return redirect()->back()->with('error', 'Data Gagal di Hapus');
+        }
+    }
+
+
+    // ukuran
+    public function storeUkuranKeberhasilan(Request $request)
+    {
+        $renaksi_id = $request->renaksi_id;
+        // $renaksi = Renaksi::where('id', $renaksi_id)->first();
+        $data = new Ukuran();
+        $data->rencana_aksi_id = $renaksi_id;
+        $data->ukuran_keberhasilan = $request->ukuran_keberhasilan;
+
+        $data->save();
+
+
+        if ($data != null) {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('success', 'Data Berhasil di Tambah');
+        } else {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('error', 'Data Gagal di Tambah');
+        }
+    }
+
+    public function updatestoreUkuranKeberhasilan(Request $request, $id)
+    {
+        $renaksi_id = $request->renaksi_id;
+        // $renaksi = Renaksi::where('id', $renaksi_id)->first();
+        $data = Ukuran::findOrFail($id);
+        $data->ukuran_keberhasilan = $request->ukuran_keberhasilan;
+
+
+        $data->save();
+
+
+        if ($data != null) {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('success', 'Data Berhasil di Update');
+        } else {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('error', 'Data Gagal di Update');
+        }
+    }
+
+    public function hapusUkuranKeberhasilan($id)
+    {
+        $data = Ukuran::findOrFail($id);
+
+        $data->delete();
+
+        if ($data != null) {
+            return redirect()->back()->with('success', 'Data Berhasil di Hapus');
+        } else {
+            return redirect()->back()->with('error', 'Data Gagal di Hapus');
+        }
+    }
+
+    public function updateTargetCapaian(Request $request, $renaksi_id)
+    {
+        $data = Renaksi::findOrFail($renaksi_id);
+
+        $data->target_capaian = $request->target_capaian;
+        $data->save();
+
+        if ($data != null) {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('success', 'Data Berhasil di Update');
+        } else {
+            return redirect()->route('admin.renaksi.detail', $renaksi_id)->with('error', 'Data Gagal di Update');
+        }
+    }
+
+
     public function detailUkuran($ukuran_id)
     {
         $ukuran = UkuranKeberhasilan::find($ukuran_id);
@@ -179,7 +277,7 @@ class RenaksiController extends Controller
     {
         $ukuran = UkuranKeberhasilan::find($request->ukuran_id);
 
-        $ukuran->target_capaian = $request->target_capaian;
+        // $ukuran->target_capaian = $request->target_capaian;
         $ukuran->catatan = $request->catatan;
         $ukuran->status = $request->status;
         if ($ukuran->bulan == 3) {

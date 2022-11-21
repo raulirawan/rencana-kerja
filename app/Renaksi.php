@@ -24,6 +24,11 @@ class Renaksi extends Model
         return $this->hasMany(Kriteria::class, 'rencana_aksi_id', 'id');
     }
 
+    public function masterUkuran()
+    {
+        return $this->hasMany(Ukuran::class, 'rencana_aksi_id', 'id');
+    }
+
     public function ukuran()
     {
         return $this->hasMany(UkuranKeberhasilan::class, 'rencana_aksi_id', 'id');

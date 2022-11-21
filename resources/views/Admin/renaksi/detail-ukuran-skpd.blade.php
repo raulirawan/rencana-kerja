@@ -51,11 +51,14 @@
                                     @csrf
                                     <div class="card-body">
                                         <input type="hidden" value="{{ $ukuran->id }}" name="ukuran_id">
-                                        {{-- <div class="form-group">
-                                            <label for="exampleInputEmail1">Target Capaian</label>
-                                            <textarea name="target_capaian" id="target_capaian" required class="form-control" placeholder="Masukan Target Capaian">{{ $ukuran->target_capaian }}</textarea>
-                                        </div> --}}
-
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Tahap Pencapaian Target</label>
+                                            <textarea name="target_capaian" id="target_capaian" required class="form-control" placeholder="Masukan Tahap Pencapaian Target">{{ $ukuran->target_capaian }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Kendala</label>
+                                            <textarea name="kendala" id="kendala" required class="form-control" placeholder="Masukan Kendala">{{ $ukuran->kendala }}</textarea>
+                                        </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Capaian</label>
                                             <select name="capaian" id="capaian" class="form-control">
@@ -95,7 +98,8 @@
                                                             </a>
                                                             <div class="text-center">
                                                                 <a href="{{ route('ukuran.delete.file', [$ukuran->id, $key]) }}"
-                                                                    class="btn btn-sm btn-danger btn-block" onclick="return confirm('Yakin ?')">
+                                                                    class="btn btn-sm btn-danger btn-block"
+                                                                    onclick="return confirm('Yakin ?')">
                                                                     Hapus
                                                                 </a>
                                                             </div>

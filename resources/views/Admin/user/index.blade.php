@@ -65,12 +65,12 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->email }}</td>
-                                                <td>{{ $item->skpd->nama_skpd }}</td>
+                                                <td>{{ $item->skpd->nama_skpd ?? '-' }}</td>
                                                 <td>
                                                     <button type="button" id="edit" data-toggle="modal"
                                                         data-target="#modal-edit" data-id="{{ $item->id }}"
                                                         data-name="{{ $item->name }}"
-                                                        data-skpd="{{ $item->skpd->id }}"
+                                                        data-skpd="{{ $item->skpd->id ?? '' }}"
                                                         class="btn btn-sm btn-primary" style='float: left;'>Edit</button>
                                                     <form action="{{ route('admin.user.delete', $item->id) }}"
                                                         method="POST" style='float: left; padding-left: 5px;'>

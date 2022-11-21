@@ -34,7 +34,7 @@ class RenaksiController extends Controller
     {
         $request->validate(
             [
-                'file_pendukung.*' => 'mimes:pdf|max:2048',
+                'file_pendukung.*' => 'max:2048',
             ],
             [
                 'file_pendukung.*.mimes' => 'File Harus Bertipe PDF',
@@ -43,6 +43,9 @@ class RenaksiController extends Controller
 
         $ukuran = UkuranKeberhasilan::find($request->ukuran_id);
 
+        $ukuran->target_capaian = $request->target_capaian;
+        $ukuran->kendala = $request->kendala;
+        // $ukuran->catatan = $request->catatan;
         $ukuran->capaian = $request->capaian;
         $ukuran->keterangan = $request->keterangan;
 

@@ -90,33 +90,13 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>Target Tercapai (perbaikan)</td>
+                                                                        <td>Target Tercapai (perlu perbaikan)</td>
                                                                         <td class="text-right">
                                                                             <a
                                                                                 href="{{ route('admin.renaksi.status.index', [$monitor->id, 'PERBAIKAN', 'B03']) }}">{{ $perbaikanB03 }}</a>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Sempurna</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK SEMPURNA', 'B03']) }}">{{ $tidakSempurnaB03 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Tercapai</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK TERCAPAI', 'B03']) }}">{{ $tidakTercapaiB03 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Verifikasi</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'VERIFIKASI', 'B03']) }}">{{ $verifikasiB03 }}</a>
-                                                                        </td>
-                                                                    </tr>
+
                                                                     <tr>
                                                                         <td>Tidak Lapor</td>
                                                                         <td class="text-right">
@@ -174,33 +154,13 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>Target Tercapai (perbaikan)</td>
+                                                                        <td>Target Tercapai (perlu perbaikan)</td>
                                                                         <td class="text-right">
                                                                             <a
                                                                                 href="{{ route('admin.renaksi.status.index', [$monitor->id, 'PERBAIKAN', 'B06']) }}">{{ $perbaikanB06 }}</a>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Sempurna</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK SEMPURNA', 'B06']) }}">{{ $tidakSempurnaB06 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Tercapai</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK TERCAPAI', 'B06']) }}">{{ $tidakTercapaiB06 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Verifikasi</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'VERIFIKASI', 'B06']) }}">{{ $verifikasiB06 }}</a>
-                                                                        </td>
-                                                                    </tr>
+
                                                                     <tr>
                                                                         <td>Tidak Lapor</td>
                                                                         <td class="text-right">
@@ -258,33 +218,13 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>Target Tercapai (perbaikan)</td>
+                                                                        <td>Target Tercapai (perlu perbaikan)</td>
                                                                         <td class="text-right">
                                                                             <a
                                                                                 href="{{ route('admin.renaksi.status.index', [$monitor->id, 'PERBAIKAN', 'B09']) }}">{{ $perbaikanB09 }}</a>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Sempurna</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK SEMPURNA', 'B09']) }}">{{ $tidakSempurnaB09 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Tercapai</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK TERCAPAI', 'B09']) }}">{{ $tidakTercapaiB09 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Verifikasi</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'VERIFIKASI', 'B09']) }}">{{ $verifikasiB09 }}</a>
-                                                                        </td>
-                                                                    </tr>
+
                                                                     <tr>
                                                                         <td>Tidak Lapor</td>
                                                                         <td class="text-right">
@@ -343,33 +283,13 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>Target Tercapai (perbaikan)</td>
+                                                                        <td>Target Tercapai (perlu perbaikan)</td>
                                                                         <td class="text-right">
                                                                             <a
                                                                                 href="{{ route('admin.renaksi.status.index', [$monitor->id, 'PERBAIKAN', 'B12']) }}">{{ $perbaikanB12 }}</a>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Sempurna</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK SEMPURNA', 'B12']) }}">{{ $tidakSempurnaB12 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Target Tidak Tercapai</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'TIDAK TERCAPAI', 'B12']) }}">{{ $tidakTercapaiB12 }}</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Verifikasi</td>
-                                                                        <td class="text-right">
-                                                                            <a
-                                                                                href="{{ route('admin.renaksi.status.index', [$monitor->id, 'VERIFIKASI', 'B12']) }}">{{ $verifikasiB12 }}</a>
-                                                                        </td>
-                                                                    </tr>
+
                                                                     <tr>
                                                                         <td>Tidak Lapor</td>
                                                                         <td class="text-right">
@@ -424,9 +344,6 @@
 
             var targetTercapaiB03 = '{{ $targetTercapaiB03 }}';
             var perbaikanB03 = '{{ $perbaikanB03 }}';
-            var tidakSempurnaB03 = '{{ $tidakSempurnaB03 }}';
-            var tidakTercapaiB03 = '{{ $tidakTercapaiB03 }}';
-            var verifikasiB03 = '{{ $verifikasiB03 }}';
             var tidakLaporB03 = '{{ $tidakLaporB03 }}';
             //-------------
             //- DONUT CHART -
@@ -436,17 +353,13 @@
             var donutData = {
                 labels: [
                     'Target Tercapai',
-                    'Target Tercapai (perbaikan)',
-                    'Target Tidak Sempurna',
-                    'Target Tidak Tercapai',
-                    'Verifikasi',
+                    'Target Tercapai (perlu perbaikan)',
                     'Tidak Lapor',
                 ],
                 datasets: [{
-                    data: [targetTercapaiB03, perbaikanB03, tidakSempurnaB03, tidakTercapaiB03,
-                        verifikasiB03, tidakLaporB03
+                    data: [targetTercapaiB03, perbaikanB03,  tidakLaporB03
                     ],
-                    backgroundColor: ['#1FAA00', '#9CFF57', '#F0AD4E', '#CB2027', '#999999', '#2B2B2B'],
+                    backgroundColor: ['#1FAA00', '#FFFB00', '#FF002D'],
                 }]
             }
             var donutOptions = {
@@ -463,27 +376,20 @@
 
             var targetTercapaiB06 = '{{ $targetTercapaiB06 }}';
             var perbaikanB06 = '{{ $perbaikanB06 }}';
-            var tidakSempurnaB06 = '{{ $tidakSempurnaB06 }}';
-            var tidakTercapaiB06 = '{{ $tidakTercapaiB06 }}';
-            var verifikasiB06 = '{{ $verifikasiB06 }}';
             var tidakLaporB06 = '{{ $tidakLaporB06 }}';
 
             var donutChartCanvas = $('#donutChartb06').get(0).getContext('2d')
             var donutData = {
                 labels: [
                     'Target Tercapai',
-                    'Target Tercapai (perbaikan)',
-                    'Target Tidak Sempurna',
-                    'Target Tidak Tercapai',
-                    'Verifikasi',
+                    'Target Tercapai (perlu perbaikan)',
                     'Tidak Lapor',
                 ],
                 datasets: [{
-                    data: [targetTercapaiB06, perbaikanB06, tidakSempurnaB06, tidakTercapaiB06,
-                        verifikasiB06, tidakLaporB06
+                    data: [targetTercapaiB06, perbaikanB06, tidakLaporB06
                     ],
 
-                    backgroundColor: ['#1FAA00', '#9CFF57', '#F0AD4E', '#CB2027', '#999999', '#2B2B2B'],
+                    backgroundColor: ['#1FAA00', '#FFFB00', '#FF002D'],
                 }]
             }
             var donutOptions = {
@@ -500,9 +406,6 @@
 
             var targetTercapaiB09 = '{{ $targetTercapaiB09 }}';
             var perbaikanB09 = '{{ $perbaikanB09 }}';
-            var tidakSempurnaB09 = '{{ $tidakSempurnaB09 }}';
-            var tidakTercapaiB09 = '{{ $tidakTercapaiB09 }}';
-            var verifikasiB09 = '{{ $verifikasiB09 }}';
             var tidakLaporB09 = '{{ $tidakLaporB09 }}';
 
 
@@ -510,17 +413,13 @@
             var donutData = {
                 labels: [
                     'Target Tercapai',
-                    'Target Tercapai (perbaikan)',
-                    'Target Tidak Sempurna',
-                    'Target Tidak Tercapai',
-                    'Verifikasi',
+                    'Target Tercapai (perlu perbaikan)',
                     'Tidak Lapor',
                 ],
                 datasets: [{
-                    data: [targetTercapaiB09, perbaikanB09, tidakSempurnaB09, tidakTercapaiB09,
-                        verifikasiB09, tidakLaporB09
+                    data: [targetTercapaiB09, perbaikanB09, tidakLaporB09
                     ],
-                    backgroundColor: ['#1FAA00', '#9CFF57', '#F0AD4E', '#CB2027', '#999999', '#2B2B2B'],
+                    backgroundColor: ['#1FAA00', '#FFFB00','#FF002D'],
                 }]
             }
             var donutOptions = {
@@ -538,9 +437,6 @@
 
             var targetTercapaiB12 = '{{ $targetTercapaiB12 }}';
             var perbaikanB12 = '{{ $perbaikanB12 }}';
-            var tidakSempurnaB12 = '{{ $tidakSempurnaB12 }}';
-            var tidakTercapaiB12 = '{{ $tidakTercapaiB12 }}';
-            var verifikasiB12 = '{{ $verifikasiB12 }}';
             var tidakLaporB12 = '{{ $tidakLaporB12 }}';
 
 
@@ -548,17 +444,13 @@
             var donutData = {
                 labels: [
                     'Target Tercapai',
-                    'Target Tercapai (perbaikan)',
-                    'Target Tidak Sempurna',
-                    'Target Tidak Tercapai',
-                    'Verifikasi',
+                    'Target Tercapai (perlu perbaikan)',
                     'Tidak Lapor',
                 ],
                 datasets: [{
-                    data: [targetTercapaiB12, perbaikanB12, tidakSempurnaB12, tidakTercapaiB12,
-                        verifikasiB12, tidakLaporB12
+                    data: [targetTercapaiB12, perbaikanB12, tidakLaporB12
                     ],
-                    backgroundColor: ['#1FAA00', '#9CFF57', '#F0AD4E', '#CB2027', '#999999', '#2B2B2B'],
+                    backgroundColor: ['#1FAA00', '#FFFB00', '#FF002D'],
                 }]
             }
             var donutOptions = {

@@ -91,16 +91,16 @@
 </head>
 <style>
     body {
-        background-image: url('bg-login.jpeg');
+        background-image: url({{ asset('assets/bg-simonik.png') }});
         background-repeat: no-repeat;
         background-size: cover;
     }
 </style>
 
 <body class="hold-transition login-page">
-    <div class="login-box">
+    <div class="login-box" style="margin-top: 135px">
         <div class="login-logo">
-            <img src="{{ asset('assets/simonik.png') }}" width="200px" alt="">
+            {{-- <img src="{{ asset('assets/simonik.png') }}" width="200px" alt=""> --}}
         </div>
         <!-- /.login-logo -->
         <div class="card">
